@@ -1,16 +1,21 @@
 <script lang="ts">
-	import '@styles/app.css';
 	import { Tooltip } from 'bits-ui';
-	import { flyAndScale } from '@/lib/utils';
+	import { flyAndScale } from '$lib/utils';
 
 	export let text = '';
+	export let href: string | undefined = undefined;
+
+	const buttonClasses =
+		'inline-flex items-center justify-center rounded-full bg-magnum-300 p-2 hover:bg-magnum-600 hover:text-white active:bg-magnum-800';
 </script>
 
 <Tooltip.Root openDelay={0}>
-	<Tooltip.Trigger
-		class="inline-flex size-fit items-center justify-center rounded-full bg-magnum-300 p-2 hover:bg-magnum-600 hover:text-white active:bg-magnum-800"
-	>
-		<slot />
+	<Tooltip.Trigger asChild let:builder>
+		{#if href}
+			<a {href} use:builder.action {...builder} class={buttonClasses}><slot /></a>
+		{:else}
+			<button use:builder.action {...builder} class={buttonClasses}><slot /></button>
+		{/if}
 	</Tooltip.Trigger>
 	<Tooltip.Content
 		transition={flyAndScale}

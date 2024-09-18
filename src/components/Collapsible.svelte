@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '@styles/app.css';
 	import { Accordion } from 'bits-ui';
 	import { ChevronDown } from 'svelte-codicons';
 	import { slide } from 'svelte/transition';
