@@ -27,7 +27,7 @@
 	});
 
 	let iconClass = cn(
-		'flex aspect-square cursor-pointer items-center justify-center rounded-full',
+		'flex flex-auto size-auto aspect-square cursor-pointer items-center justify-center rounded-full',
 		className
 	);
 </script>

@@ -1,2 +1,77 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Link from '@components/Link.svelte';
+	import List from '@components/List.svelte';
+	import ListElement from '@components/ListElement.svelte';
+	import { Check } from 'lucide-svelte';
+	import EllipsisVertical from 'lucide-svelte/icons/ellipsis-vertical';
+	import { DropdownMenu } from 'bits-ui';
+	import DropdownMenuTrigger from '@components/DropdownMenu.Trigger.svelte';
+	import DropdownMenuContent from '@components/DropdownMenu.Content.svelte';
+	import DropdownMenuItem from '@components/DropdownMenu.Item.svelte';
+	import DropdownMenuSeparator from '@components/DropdownMenu.Separator.svelte';
+
+	let header = {
+		title: 'Server Contexts',
+		link: {
+			text: 'Create context',
+			href: '/contexts/create'
+		}
+	};
+
+	let contexts = [
+		{
+			name: 'nats-msk',
+			server: 'nats://nats.msk',
+			selected: true
+		},
+		{
+			name: 'nats-ams',
+			server: 'nats://nats.ams',
+			selected: false
+		}
+	];
+</script>
+
+<div class="flex min-h-screen items-center justify-center">
+	<List {header}>
+		{#each contexts as context}
+			<ListElement>
+				{#if context.selected}
+					<Check class="grow-0 text-green-700"></Check>
+				{:else}
+					<Check class="grow-0 text-white/0"></Check>
+				{/if}
+				<div class="grow-0">
+					<h6
+						class="block font-sans text-base font-semibold leading-relaxed tracking-normal antialiased"
+					>
+						{context.name}
+					</h6>
+					<p class="block font-sans text-sm font-light leading-normal text-gray-700 antialiased">
+						{context.server}
+					</p>
+				</div>
+				<div class="flex grow flex-row-reverse">
+					<DropdownMenu.Root>
+						<DropdownMenuTrigger />
+						<DropdownMenuContent>
+							<DropdownMenuItem
+								><p class="text-cyan-600 dark:text-green-800">Edit</p></DropdownMenuItem
+							>
+
+							<DropdownMenuSeparator />
+
+							<DropdownMenuItem>Streams</DropdownMenuItem>
+							<DropdownMenuItem>Info</DropdownMenuItem>
+
+							<DropdownMenuSeparator />
+
+							<DropdownMenuItem><p class="text-red-600">Remove</p></DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu.Root>
+					<!-- <Link href="context/{context.name}/edit"><EllipsisVertical /></Link> -->
+				</div>
+			</ListElement>
+		{/each}
+	</List>
+</div>

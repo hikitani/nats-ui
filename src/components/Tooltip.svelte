@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { Tooltip } from 'bits-ui';
-	import { flyAndScale } from '$lib/utils';
+	import { cn, flyAndScale } from '$lib/utils';
 
 	export let text = '';
 	export let href: string | undefined = undefined;
 
-	const buttonClasses =
-		'inline-flex items-center justify-center rounded-full bg-magnum-300 p-2 hover:bg-magnum-600 hover:text-white active:bg-magnum-800';
+	const buttonClasses = cn(
+		'inline-flex items-center justify-center rounded-full bg-magnum-300 p-3 hover:bg-magnum-600 hover:text-white active:bg-magnum-800'
+	);
 </script>
 
 <Tooltip.Root openDelay={0}>
