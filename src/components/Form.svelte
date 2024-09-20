@@ -62,7 +62,7 @@
 				</div>
 			{/each}
 			<div class="flex flex-row pt-10">
-				<Button red>{close_title}</Button>
+				<Button red goback>{close_title}</Button>
 				<span class="grow"></span>
 				<Button>{send_title}</Button>
 			</div>
