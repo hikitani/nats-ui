@@ -1,9 +1,7 @@
 <script>
-	import Link from '@components/Link.svelte';
 	import List from '@components/List.svelte';
 	import ListElement from '@components/ListElement.svelte';
 	import { Check } from 'lucide-svelte';
-	import EllipsisVertical from 'lucide-svelte/icons/ellipsis-vertical';
 	import { DropdownMenu } from 'bits-ui';
 	import DropdownMenuTrigger from '@components/DropdownMenu.Trigger.svelte';
 	import DropdownMenuContent from '@components/DropdownMenu.Content.svelte';
@@ -14,7 +12,7 @@
 		title: 'Server Contexts',
 		link: {
 			text: 'Create context',
-			href: '/contexts/create'
+			href: '/context/create'
 		}
 	};
 
@@ -55,18 +53,24 @@
 					<DropdownMenu.Root>
 						<DropdownMenuTrigger />
 						<DropdownMenuContent>
+							<DropdownMenuItem>
+								<a href="/context/{context.name}/edit" class="text-cyan-600 dark:text-green-800"
+									>Edit</a
+								>
+							</DropdownMenuItem>
+
+							<DropdownMenuSeparator />
+
 							<DropdownMenuItem
-								><p class="text-cyan-600 dark:text-green-800">Edit</p></DropdownMenuItem
+								><a href="/context/{context.name}/stream/list">Streams</a></DropdownMenuItem
 							>
+							<DropdownMenuItem><a href="/context/{context.name}/info">Info</a></DropdownMenuItem>
 
 							<DropdownMenuSeparator />
 
-							<DropdownMenuItem>Streams</DropdownMenuItem>
-							<DropdownMenuItem>Info</DropdownMenuItem>
-
-							<DropdownMenuSeparator />
-
-							<DropdownMenuItem><p class="text-red-600">Remove</p></DropdownMenuItem>
+							<DropdownMenuItem>
+								<a href="/context/{context.name}/remove" class="text-red-600">Remove</a>
+							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu.Root>
 					<!-- <Link href="context/{context.name}/edit"><EllipsisVertical /></Link> -->

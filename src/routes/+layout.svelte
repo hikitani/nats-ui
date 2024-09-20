@@ -13,7 +13,7 @@
 	];
 </script>
 
-<div id="menu" class="absolute left-0 right-0 z-50 ml-auto mr-auto">
+<div id="menu" class="absolute left-0 right-0 z-50 -mt-6 ml-auto mr-auto">
 	<DockMenu class="mb-5" direction="middle" let:mouseX let:distance let:magnification>
 		{#each navs as item}
 			<DockIcon {mouseX} {magnification} {distance}>

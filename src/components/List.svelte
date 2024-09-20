@@ -5,7 +5,7 @@
 		| undefined
 		| {
 				title: string;
-				link:
+				link?:
 					| undefined
 					| {
 							text: string;
