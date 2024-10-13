@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let Hst;
-	import Form, { type InputInfo, type Data } from '@components/Form.svelte';
+	import Form, { type InputInfo, type Data, Problems } from '@components/Form.svelte';
 	import { InputType } from '@components/Input.svelte';
 
 	let inputs: InputInfo[] = [
@@ -50,6 +50,17 @@
 <Hst.Story>
 	<div class="flex min-h-screen items-center justify-center">
 		<p style="white-space: pre-line">{json_data}</p>
-		<Form title="Foo Form 1111" {inputs} bind:data />
+		<Form
+			title="Foo Form 1111"
+			{inputs}
+			bind:data
+			send={{
+				onSend: () => {
+					return new Problems()
+						.add('name', { message: 'Wrong name' })
+						.add('name', { message: 'Bad name' });
+				}
+			}}
+		/>
 	</div>
 </Hst.Story>
