@@ -15,7 +15,8 @@
 		"test:unit": "vitest",
 		"story:dev": "histoire dev",
 		"story:build": "histoire build",
-		"story:preview": "histoire preview"
+		"story:preview": "histoire preview",
+		"nats": "sudo docker compose --project-directory testcontainer/ up"
 	},
 	"devDependencies": {
 		"@histoire/plugin-svelte": "^0.17.17",
@@ -50,6 +51,7 @@
 		"bits-ui": "^0.21.13",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
+		"dexie": "^4.0.8",
 		"lucide-svelte": "^0.441.0",
 		"tailwind-merge": "^2.5.2"
 	}
