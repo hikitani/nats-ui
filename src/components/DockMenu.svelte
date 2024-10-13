@@ -17,7 +17,7 @@
 	export let direction: DockProps['direction'] = 'middle';
 
 	const dockVariants = cva(
-		'shadow-xl dark:bg-zinc-700/80 mx-auto w-max mt-8 h-[58px] p-2 flex gap-2 rounded-2xl border backdrop-blur-sm bg-white/30 border-white/30'
+		'shadow-xl dark:bg-zinc-700/50 mx-auto w-max mt-8 h-[58px] p-2 flex gap-2 rounded-2xl border backdrop-blur-sm bg-white/30 border-white/30'
 	);
 
 	let dockElement: HTMLDivElement;
