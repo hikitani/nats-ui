@@ -39,6 +39,7 @@
 	export let value: any = '';
 	export let id: string = '';
 	export let type: InputType = InputType.Text;
+	export let disabled: boolean = false;
 
 	export let number: NumberOptions = {};
 	export let text: TextOptions = {};
@@ -55,6 +56,7 @@
 		pattern={text.pattern}
 		placeholder={text.placeholder}
 		{id}
+		{disabled}
 		bind:value
 	/>
 {/if}
@@ -68,6 +70,7 @@
 		pattern={email.pattern}
 		placeholder={email.placeholder}
 		{id}
+		{disabled}
 		bind:value
 	/>
 {/if}
@@ -81,6 +84,7 @@
 		pattern={password.pattern}
 		placeholder={password.placeholder}
 		{id}
+		{disabled}
 		bind:value
 	/>
 {/if}
@@ -93,12 +97,13 @@
 		min={number.min}
 		max={number.max}
 		{id}
+		{disabled}
 		bind:value
 	/>
 {/if}
 
 {#if type === InputType.Checkbox}
-	<input type="checkbox" class="input size-fit" {id} bind:checked={value} />
+	<input type="checkbox" class="input size-fit" {id} {disabled} bind:checked={value} />
 {/if}
 
 <style lang="postcss">
