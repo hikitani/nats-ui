@@ -1,0 +1,8 @@
+services:
+  nats:
+    image: nats
+    ports:
+      - '8222:8222'
+    volumes:
+      - ./nats.conf:/etc/nats/nats.conf
+    command: '--config /etc/nats/nats.conf'
