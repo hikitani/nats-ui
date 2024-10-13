@@ -1,7 +1,6 @@
 <script>
 	import List from '@components/List.svelte';
 	import ListElement from '@components/ListElement.svelte';
-	import { Check } from 'lucide-svelte';
 	import { DropdownMenu } from 'bits-ui';
 	import DropdownMenuTrigger from '@components/DropdownMenu.Trigger.svelte';
 	import DropdownMenuContent from '@components/DropdownMenu.Content.svelte';
@@ -16,29 +15,18 @@
 		}
 	};
 
-	let contexts = [
-		{
-			name: 'nats-msk',
-			server: 'nats://nats.msk',
-			selected: true
-		},
-		{
-			name: 'nats-ams',
-			server: 'nats://nats.ams',
-			selected: false
-		}
-	];
+	export let data;
 </script>
 
 <div class="flex min-h-screen items-center justify-center">
 	<List {header}>
-		{#each contexts as context}
+		{#each data.contexts as context}
 			<ListElement>
-				{#if context.selected}
+				<!-- {#if context.selected}
 					<Check class="grow-0 text-green-700"></Check>
 				{:else}
 					<Check class="grow-0 text-white/0"></Check>
-				{/if}
+				{/if} -->
 				<div class="grow-0">
 					<h6
 						class="block font-sans text-base font-semibold leading-relaxed tracking-normal antialiased"
@@ -74,6 +62,14 @@
 						</DropdownMenuContent>
 					</DropdownMenu.Root>
 					<!-- <Link href="context/{context.name}/edit"><EllipsisVertical /></Link> -->
+				</div>
+			</ListElement>
+		{:else}
+			<ListElement>
+				<div class="grow flex justify-center">
+					<h6 class="font-sans text-base font-semibold leading-relaxed tracking-normal antialiased">
+						Empty list
+					</h6>
 				</div>
 			</ListElement>
 		{/each}
