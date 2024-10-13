@@ -1,25 +1,20 @@
 <script>
-	import { isDark, toogleDarkMode, toogleLightMode } from '$lib/dark';
+	import { isDark, toogleDarkMode } from '$lib/dark';
 	import Toogle from '@components/Toogle.svelte';
 	import { Sun, Moon } from 'lucide-svelte';
 
-	let isDarkMode = isDark();
-	$: if (isDarkMode) {
-		toogleDarkMode();
-	} else {
-		toogleLightMode();
-	}
-
-	let pressed = false;
+	export let isDarkMode = isDark();
 	const onPressedChange = () => {
-		isDarkMode = pressed;
+		isDarkMode = toogleDarkMode();
 	};
 </script>
 
-<Toogle bind:pressed {onPressedChange}>
-	{#if isDarkMode}
-		<Moon></Moon>
-	{:else}
-		<Sun></Sun>
-	{/if}
-</Toogle>
+<div class="flex size-fit items-center rounded-full bg-zinc-800/20 p-2 hover:bg-zinc-800/40">
+	<Toogle {onPressedChange}>
+		{#if isDarkMode}
+			<Moon class="text-magnum-300"></Moon>
+		{:else}
+			<Sun class="text-zinc-700"></Sun>
+		{/if}
+	</Toogle>
+</div>

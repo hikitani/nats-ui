@@ -14,7 +14,7 @@ const updateDarkMode = () => {
 
 export const isDark = () => {
 	if (!browser) {
-		return;
+		return false;
 	}
 
 	return (
@@ -25,18 +25,14 @@ export const isDark = () => {
 
 export const toogleDarkMode = () => {
 	if (!browser) {
-		return;
+		return false;
 	}
 
-	localStorage.theme = 'dark';
-	updateDarkMode();
-};
-
-export const toogleLightMode = () => {
-	if (!browser) {
-		return;
+	if (isDark()) {
+		localStorage.theme = 'light';
+	} else {
+		localStorage.theme = 'dark';
 	}
-
-	localStorage.theme = 'light';
 	updateDarkMode();
+	return isDark();
 };
