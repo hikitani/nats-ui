@@ -10,10 +10,11 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			// '@': path.resolve('./src'),
 			'@styles': path.resolve('./src/styles'),
 			'@components': path.resolve('./src/components'),
-			'@effects': path.resolve('./src/effects')
+			'@effects': path.resolve('./src/effects'),
+			'@db': path.resolve('./src/database/db'),
+			'@tables': path.resolve('./src/database/tables')
 		}
 	},
 	preprocess: vitePreprocess()
