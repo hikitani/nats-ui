@@ -7,7 +7,7 @@
 <div class="card">
 	<p class="status">{status}</p>
 	<p class="title">{title}</p>
-	<p class="description">{description}</p>
+	<p class="description">{@html description}</p>
 	<slot />
 </div>
 
