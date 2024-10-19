@@ -44,19 +44,41 @@
 </div>
 
 <div id="content" class="absolute size-full bg-magnum-100 dark:bg-zinc-500">
-	{#if isDarkMode}
-		<DotPattern width={30} height={30} x={3} y={5} cx={$dotPos} cy={$dotPos} fillColor="#f9c978" />
-	{:else}
-		<DotPattern width={30} height={30} x={3} y={5} cx={$dotPos} cy={$dotPos} fillColor="#bd5711" />
-	{/if}
+	<div class="absolute z-0 size-full">
+		{#if isDarkMode}
+			<DotPattern
+				width={30}
+				height={30}
+				x={3}
+				y={5}
+				cx={$dotPos}
+				cy={$dotPos}
+				fillColor="#f9c978"
+			/>
+		{:else}
+			<DotPattern
+				width={30}
+				height={30}
+				x={3}
+				y={5}
+				cx={$dotPos}
+				cy={$dotPos}
+				fillColor="#bd5711"
+			/>
+		{/if}
+	</div>
 
-	{#if $page.state.status === 500}
+	{#if $page.state.status === 500 || Math.floor(($page.state.status || 0) / 100) === 4}
 		<div class="flex min-h-screen items-center justify-center">
 			<ErrorCard status={$page.state.status} title="App Error" description={$page.state.message}>
 				<div class="pt-5">
 					<Button
 						onClick={() => {
-							replaceState('', {});
+							if ($page.state.redirect) {
+								document.location = $page.state.redirect;
+							} else {
+								replaceState('', {});
+							}
 						}}>Go back</Button
 					>
 				</div>

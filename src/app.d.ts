@@ -8,6 +8,7 @@ declare global {
 		interface PageState {
 			status?: number = 200;
 			message?: string = '';
+			redirect?: string = '';
 		}
 		// interface Platform {}
 	}
