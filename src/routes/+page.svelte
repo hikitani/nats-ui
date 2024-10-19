@@ -57,7 +57,7 @@
 							<DropdownMenuSeparator />
 
 							<DropdownMenuItem>
-								<a href="/context/{context.name}/remove" class="text-red-600">Remove</a>
+								<a href="/context/{context.name}/delete" class="text-red-600">Remove</a>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu.Root>
