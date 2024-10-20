@@ -42,6 +42,14 @@
 			return this;
 		}
 
+		adds(inputID: string, problems: string[]): Problems {
+			problems.forEach((v) => {
+				this.add(inputID, { message: v });
+			});
+
+			return this;
+		}
+
 		get(inputID: string): Problem[] {
 			return this.problems[inputID];
 		}
