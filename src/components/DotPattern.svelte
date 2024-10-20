@@ -16,7 +16,7 @@
 
 <svg
 	aria-hidden="true"
-	class={cn('pointer-events-none absolute inset-0 h-full w-full ', className)}
+	class={cn('pointer-events-none fixed inset-0 top-0 h-full w-full ', className)}
 	{...$$restProps}
 	fill={fillColor}
 >
