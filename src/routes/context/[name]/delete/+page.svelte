@@ -22,7 +22,7 @@
 	const send: SendOpions = {
 		title: 'Yes',
 		redirectRef: '/',
-		onSend: remove
+		onSend: () => remove(data)
 	};
 </script>
 
