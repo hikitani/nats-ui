@@ -69,7 +69,7 @@
 	</div>
 
 	{#if $page.state.status === 500 || Math.floor(($page.state.status || 0) / 100) === 4}
-		<div class="flex min-h-screen items-center justify-center">
+		<div class="relative flex min-h-screen items-center justify-center">
 			<ErrorCard status={$page.state.status} title="App Error" description={$page.state.message}>
 				<div class="pt-5">
 					<Button
