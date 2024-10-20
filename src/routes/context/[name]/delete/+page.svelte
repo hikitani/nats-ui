@@ -26,11 +26,9 @@
 	};
 </script>
 
-<div class="flex min-h-screen items-center justify-center">
-	<Form
-		title="Do you want to delete the context {data.context?.name}"
-		close_title="No"
-		inputs={[]}
-		{send}
-	></Form>
-</div>
+<Form
+	title="Do you want to delete the context {data.context?.name}"
+	close_title="No"
+	inputs={[]}
+	{send}
+></Form>

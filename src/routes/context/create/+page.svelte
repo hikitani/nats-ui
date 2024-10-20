@@ -29,6 +29,4 @@
 	];
 </script>
 
-<div class="flex min-h-screen items-center justify-center">
-	<Form title="New Context" {inputs} {send} />
-</div>
+<Form title="New Context" {inputs} {send} />
