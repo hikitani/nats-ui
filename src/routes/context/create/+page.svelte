@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { InputType } from '@components/Input.svelte';
 	import Form, { type InputInfo, type SendOpions } from '@components/Form.svelte';
-	import { create } from './create';
+	import create from './create';
 
 	let send: SendOpions = {
 		title: 'Create',
