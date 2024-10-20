@@ -92,7 +92,8 @@
 	let currentProblems = new Problems();
 </script>
 
-<div
+<form
+	on:submit|preventDefault
 	class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md dark:bg-magnum-200"
 >
 	<div class="p-6">
@@ -145,4 +146,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</form>
