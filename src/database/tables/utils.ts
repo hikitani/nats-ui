@@ -1,5 +1,9 @@
 export class Table {
 	private __is_table: void = undefined;
+
+	json() {
+		return fieldsToJson(this);
+	}
 }
 
 export const castTable = <T extends Table & Object>(
@@ -19,4 +23,27 @@ export const castTable = <T extends Table & Object>(
 	}
 
 	return entity as T;
+};
+
+const fieldsToJson = <T extends Object>(v: T): T => {
+	const getters = Object.entries(Object.getOwnPropertyDescriptors((v as any).__proto__))
+		.filter(([key, descriptor]) => typeof descriptor.get === 'function')
+		.map(([key, descriptor]) => {
+			return {
+				key: key,
+				get: descriptor.get
+			};
+		});
+
+	const obj: any = {};
+
+	getters.forEach((item) => {
+		if (item.get === undefined) {
+			return;
+		}
+
+		obj[item.key] = (item.get as any).call(v);
+	});
+
+	return obj as T;
 };
