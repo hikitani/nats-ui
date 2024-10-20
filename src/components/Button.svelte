@@ -24,10 +24,16 @@
 	};
 </script>
 
-<Button.Root
-	on:click={clickHandler}
-	href={goback ? '' : href}
-	class={twJoin(btnCommon, red ? btnRed : btnPrimary)}
->
-	<slot />
-</Button.Root>
+{#if goback}
+	<Button.Root
+		type="button"
+		on:click={clickHandler}
+		class={twJoin(btnCommon, red ? btnRed : btnPrimary)}
+	>
+		<slot />
+	</Button.Root>
+{:else}
+	<Button.Root on:click={clickHandler} {href} class={twJoin(btnCommon, red ? btnRed : btnPrimary)}>
+		<slot />
+	</Button.Root>
+{/if}
