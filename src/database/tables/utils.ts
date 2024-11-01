@@ -1,6 +1,9 @@
 export class Table {
 	private __is_table: void = undefined;
 
+	/**
+	 * Returns a JSON representation of the object where field is getter.
+	 */
 	json() {
 		return fieldsToJson(this);
 	}
