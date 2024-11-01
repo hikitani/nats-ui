@@ -2,6 +2,7 @@
 	import { Motion } from 'svelte-motion';
 	import { cva, type VariantProps } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
+	import { type Action } from 'svelte/action';
 
 	interface DockProps extends VariantProps<typeof dockVariants> {
 		className?: string;
@@ -10,18 +11,28 @@
 		direction?: 'top' | 'middle' | 'bottom';
 	}
 
-	let className: DockProps['className'] = undefined;
-	export { className as class };
-	export let magnification: DockProps['magnification'] = 60;
-	export let distance: DockProps['distance'] = 140;
-	export let direction: DockProps['direction'] = 'middle';
+	interface Props {
+		class?: DockProps['className'];
+		magnification?: DockProps['magnification'];
+		distance?: DockProps['distance'];
+		direction?: DockProps['direction'];
+		children?: import('svelte').Snippet<[any]>;
+	}
+
+	let {
+		class: className = undefined,
+		magnification = 60,
+		distance = 140,
+		direction = 'middle',
+		children
+	}: Props = $props();
 
 	const dockVariants = cva(
 		'shadow-xl dark:bg-zinc-700/50 mx-auto w-max h-[58px] p-2 flex gap-2 rounded-2xl border backdrop-blur-sm bg-white/30 border-white/30'
 	);
 
-	let dockElement: HTMLDivElement;
-	let mouseX = Infinity;
+	let dockElement: HTMLDivElement | undefined = $state();
+	let mouseX = $state(Infinity);
 	function handleMouseMove(e: MouseEvent) {
 		mouseX = e.pageX;
 	}
@@ -37,18 +48,20 @@
 	});
 </script>
 
-<Motion let:motion>
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
-		use:motion
-		bind:this={dockElement}
-		on:mousemove={(e) => handleMouseMove(e)}
-		on:mouseleave={handleMouseLeave}
-		class={dockClass}
-	>
-		<slot {mouseX} {magnification} {distance}>
-			<!-- Your Content -->
-			Default
-		</slot>
-	</div>
+<Motion>
+	{#snippet children(motion: Action)}
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<div
+			use:motion
+			bind:this={dockElement}
+			onmousemove={(e) => handleMouseMove(e)}
+			onmouseleave={handleMouseLeave}
+			class={dockClass}
+		>
+			{#if children}{@render children({ mouseX, magnification, distance })}{:else}
+				<!-- Your Content -->
+				Default
+			{/if}
+		</div>
+	{/snippet}
 </Motion>

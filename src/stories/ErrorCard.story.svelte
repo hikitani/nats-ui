@@ -1,6 +1,6 @@
 <script>
-	export let Hst;
 	import ErrorCard from '@components/ErrorCard.svelte';
+	let { Hst } = $props();
 </script>
 
 <Hst.Story>

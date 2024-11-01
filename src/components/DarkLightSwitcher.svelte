@@ -3,7 +3,8 @@
 	import Toogle from '@components/Toogle.svelte';
 	import { Sun, Moon } from 'lucide-svelte';
 
-	export let isDarkMode = isDark();
+	let { isDarkMode = $bindable(isDark()) } = $props();
+
 	const onPressedChange = () => {
 		isDarkMode = toogleDarkMode();
 	};

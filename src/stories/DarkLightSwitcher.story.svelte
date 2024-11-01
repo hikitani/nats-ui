@@ -1,6 +1,6 @@
 <script>
-	export let Hst;
 	import DarkLightSwitcher from '@components/DarkLightSwitcher.svelte';
+	let { Hst } = $props();
 </script>
 
 <Hst.Story>

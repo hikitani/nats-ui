@@ -1,7 +1,7 @@
 <script>
-	export let Hst;
 	import Toogle from '@components/Toogle.svelte';
 	import { Sun } from 'lucide-svelte';
+	let { Hst } = $props();
 </script>
 
 <Hst.Story>

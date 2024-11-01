@@ -2,8 +2,13 @@
 	import { Tooltip } from 'bits-ui';
 	import { cn, flyAndScale } from '$lib/utils';
 
-	export let text = '';
-	export let href: string | undefined = undefined;
+	interface Props {
+		text?: string;
+		href?: string | undefined;
+		children?: import('svelte').Snippet;
+	}
+
+	let { text = '', href = undefined, children }: Props = $props();
 
 	const buttonClasses = cn(
 		'inline-flex items-center justify-center rounded-full bg-magnum-300 p-3 hover:bg-magnum-600 hover:text-white active:bg-magnum-800'
@@ -11,13 +16,15 @@
 </script>
 
 <Tooltip.Root openDelay={0}>
-	<Tooltip.Trigger asChild let:builder>
-		{#if href}
-			<a {href} use:builder.action {...builder} class={buttonClasses}><slot /></a>
-		{:else}
-			<button use:builder.action {...builder} class={buttonClasses}><slot /></button>
-		{/if}
-	</Tooltip.Trigger>
+	<Tooltip.Trigger asChild >
+		{#snippet children({ builder })}
+				{#if href}
+				<a {href} use:builder.action {...builder} class={buttonClasses}>{@render children?.()}</a>
+			{:else}
+				<button use:builder.action {...builder} class={buttonClasses}>{@render children?.()}</button>
+			{/if}
+					{/snippet}
+		</Tooltip.Trigger>
 	<Tooltip.Content
 		transition={flyAndScale}
 		transitionConfig={{ y: 8, duration: 150 }}

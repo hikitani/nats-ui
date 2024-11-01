@@ -1,14 +1,24 @@
 <script lang="ts">
-	export let status: number = 500;
-	export let title: string = 'Error';
-	export let description: string = 'Whoops, something went wrong.';
+	interface Props {
+		status?: number;
+		title?: string;
+		description?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		status = 500,
+		title = 'Error',
+		description = 'Whoops, something went wrong.',
+		children
+	}: Props = $props();
 </script>
 
 <div class="card">
 	<p class="status">{status}</p>
 	<p class="title">{title}</p>
 	<p class="description">{@html description}</p>
-	<slot />
+	{@render children?.()}
 </div>
 
 <style lang="postcss">

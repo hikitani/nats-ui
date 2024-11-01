@@ -1,10 +1,17 @@
 <script>
 	import { DropdownMenu } from 'bits-ui';
 	import { flyAndScale } from '$lib/utils';
+	/**
+	 * @typedef {Object} Props
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {Props} */
+	let { children } = $props();
 </script>
 
 <DropdownMenu.Content transition={flyAndScale} sideOffset={8}>
-	<div class="menu"><slot /></div>
+	<div class="menu">{@render children?.()}</div>
 </DropdownMenu.Content>
 
 <style lang="postcss">

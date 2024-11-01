@@ -2,7 +2,14 @@
 	import { DropdownMenu } from 'bits-ui';
 	import { Check } from 'lucide-svelte';
 
-	export let checked = false;
+	/**
+	 * @typedef {Object} Props
+	 * @property {boolean} [checked]
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {Props} */
+	let { checked = false, children } = $props();
 </script>
 
 <DropdownMenu.Item
@@ -13,7 +20,7 @@
 	{/if}
 
 	<div style="" class="growchild grow">
-		<slot />
+		{@render children?.()}
 	</div>
 
 	<style>

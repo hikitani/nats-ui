@@ -1,8 +1,8 @@
 <script>
-	export let Hst;
 	import '@styles/app.css';
 	import Tooltip from '@components/Tooltip.svelte';
 	import { House } from 'lucide-svelte';
+	let { Hst } = $props();
 </script>
 
 <Hst.Story>

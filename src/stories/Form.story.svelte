@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let Hst;
 	import Form, { type InputInfo, type Data, Problems } from '@components/Form.svelte';
 	import { InputType } from '@components/Input.svelte';
+	let { Hst } = $props();
 
 	let inputs: InputInfo[] = [
 		{
@@ -40,11 +40,11 @@
 		}
 	];
 
-	let data: Data = {
+	let data: Data = $state({
 		name: 'fsf'
-	};
+	});
 
-	$: json_data = JSON.stringify(data as any, null, 2);
+	let json_data = $derived(JSON.stringify(data as any, null, 2));
 </script>
 
 <Hst.Story>

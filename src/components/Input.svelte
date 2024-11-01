@@ -1,11 +1,19 @@
-<script lang="ts" context="module">
-	export enum InputType {
-		Checkbox,
-		Email,
-		Number,
-		Password,
-		Text
-	}
+<script lang="ts" module>
+	export type InputTypeSymbol = Symbol;
+
+	export const InputType: {
+		Checkbox: InputTypeSymbol;
+		Email: InputTypeSymbol;
+		Number: InputTypeSymbol;
+		Password: InputTypeSymbol;
+		Text: InputTypeSymbol;
+	} = {
+		Checkbox: Symbol(),
+		Email: Symbol(),
+		Number: Symbol(),
+		Password: Symbol(),
+		Text: Symbol()
+	};
 
 	export type NumberOptions = {
 		min?: number;
@@ -36,15 +44,27 @@
 </script>
 
 <script lang="ts">
-	export let value: any = '';
-	export let id: string = '';
-	export let type: InputType = InputType.Text;
-	export let disabled: boolean = false;
+	interface Props {
+		value?: any;
+		id?: string;
+		type?: InputTypeSymbol;
+		disabled?: boolean;
+		number?: NumberOptions;
+		text?: TextOptions;
+		email?: EmailOptions;
+		password?: PasswordOptions;
+	}
 
-	export let number: NumberOptions = {};
-	export let text: TextOptions = {};
-	export let email: EmailOptions = {};
-	export let password: PasswordOptions = {};
+	let {
+		value = $bindable(''),
+		id = '',
+		type = InputType.Text,
+		disabled = false,
+		number = {},
+		text = {},
+		email = {},
+		password = {}
+	}: Props = $props();
 </script>
 
 {#if type === InputType.Text}

@@ -15,7 +15,7 @@
 		}
 	};
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <div class="flex items-center justify-center">

@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { Toggle } from 'bits-ui';
 
-	export let onPressedChange: ((checked: boolean) => void) | undefined = undefined;
-	export let pressed = false;
+	interface Props {
+		onPressedChange?: ((checked: boolean) => void) | undefined;
+		pressed?: boolean;
+		children?: import('svelte').Snippet;
+	}
+
+	let { onPressedChange = undefined, pressed = $bindable(false), children }: Props = $props();
 </script>
 
 <Toggle.Root bind:pressed {onPressedChange} class="items-center justify-center rounded-[9px]">
-	<slot />
+	{@render children?.()}
 </Toggle.Root>

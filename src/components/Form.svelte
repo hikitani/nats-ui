@@ -1,7 +1,7 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	export type InputInfo = {
 		id: string;
-		type: InputType;
+		type: InputTypeSymbol;
 		label: string;
 		label_inline?: boolean;
 		disabled?: boolean;
@@ -65,11 +65,11 @@
 	import Button from './Button.svelte';
 	import Input, {
 		type EmailOptions,
+		type InputTypeSymbol,
 		type NumberOptions,
 		type PasswordOptions,
 		type TextOptions
 	} from './Input.svelte';
-	import { InputType } from './Input.svelte';
 	import Label from './Label.svelte';
 
 	const defaultSend: SendOpions = {
@@ -78,11 +78,21 @@
 	};
 	const defaultCloseTitle = 'Close';
 
-	export let title: string;
-	export let close_title: string = defaultCloseTitle;
-	export let inputs: InputInfo[];
-	export let data: Data = {};
-	export let send: SendOpions;
+	interface Props {
+		title: string;
+		close_title?: string;
+		inputs: InputInfo[];
+		data?: Data;
+		send: SendOpions;
+	}
+
+	let {
+		title,
+		close_title = defaultCloseTitle,
+		inputs,
+		data = $bindable({}),
+		send = $bindable()
+	}: Props = $props();
 	send = { ...defaultSend, ...send };
 
 	const formId = makeid(6);
@@ -97,11 +107,13 @@
 		}
 	};
 
-	let currentProblems = new Problems();
+	let currentProblems = $state(new Problems());
 </script>
 
 <form
-	on:submit|preventDefault
+	onsubmit={(e) => {
+		e.preventDefault();
+	}}
 	class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md dark:bg-magnum-200"
 >
 	<div class="p-6">

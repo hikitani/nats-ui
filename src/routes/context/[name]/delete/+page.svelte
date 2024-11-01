@@ -4,7 +4,7 @@
 	import Form from '@components/Form.svelte';
 	import { remove } from './delete.js';
 
-	export let data;
+	let { data } = $props();
 
 	afterNavigate(async (nav) => {
 		await nav.complete;

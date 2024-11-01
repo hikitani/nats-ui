@@ -1,8 +1,8 @@
 <script>
-	export let Hst;
 	import Input from '@components/Input.svelte';
+	let { Hst } = $props();
 
-	let text = '';
+	let text = $state('');
 </script>
 
 <Hst.Story>

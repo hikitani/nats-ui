@@ -1,8 +1,8 @@
 <script>
-	export let Hst;
 	import List from '@components/List.svelte';
 	import ListElement from '@components/ListElement.svelte';
 	import { CircleCheckBig } from 'lucide-svelte';
+	let { Hst } = $props();
 
 	let header = {
 		title: 'List',

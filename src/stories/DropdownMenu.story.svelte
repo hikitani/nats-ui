@@ -1,10 +1,10 @@
 <script>
-	export let Hst;
 	import DropdownMenuTrigger from '@components/DropdownMenu.Trigger.svelte';
 	import DropdownMenuContent from '@components/DropdownMenu.Content.svelte';
 	import DropdownMenuItem from '@components/DropdownMenu.Item.svelte';
 	import DropdownMenuSeparator from '@components/DropdownMenu.Separator.svelte';
 	import { DropdownMenu } from 'bits-ui';
+	let { Hst } = $props();
 </script>
 
 <Hst.Story>

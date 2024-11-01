@@ -1,4 +1,6 @@
 <script>
+	import { run } from 'svelte/legacy';
+
 	import '@styles/app.css';
 	import DockMenu from '@components/DockMenu.svelte';
 	import DockIcon from '@components/DockIcon.svelte';
@@ -12,6 +14,13 @@
 	import { tweened } from 'svelte/motion';
 	import { page } from '$app/stores';
 	import { replaceState } from '$app/navigation';
+	/**
+	 * @typedef {Object} Props
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {Props} */
+	let { children } = $props();
 
 	let navs = [
 		{ label: 'Home', icon: Home, href: '/' },
@@ -19,29 +28,33 @@
 		{ label: 'Settings', icon: Settings, href: '/settings' }
 	];
 
-	let isDarkMode = isDark();
+	let isDarkMode = $state(isDark());
 	let dotPos = tweened(15);
-	$: if (isDarkMode) {
-		dotPos.set(17);
-	} else {
-		dotPos.set(12);
-	}
+	run(() => {
+		if (isDarkMode) {
+			dotPos.set(17);
+		} else {
+			dotPos.set(12);
+		}
+	});
 </script>
 
 <div class=" bg-magnum-100 dark:bg-zinc-500">
 	<div id="menu" class="sticky top-0 z-50 ml-auto mr-auto mt-0 pb-5 pt-5">
-		<DockMenu direction="middle" let:mouseX let:distance let:magnification>
-			{#each navs as item}
+		<DockMenu direction="middle"   >
+			{#snippet children({ mouseX, distance, magnification })}
+						{#each navs as item}
+					<DockIcon {mouseX} {magnification} {distance}>
+						<Tooltip text={item.label} href={item.href}>
+							<item.icon size={20} strokeWidth={1.2}></item.icon>
+						</Tooltip>
+					</DockIcon>
+				{/each}
 				<DockIcon {mouseX} {magnification} {distance}>
-					<Tooltip text={item.label} href={item.href}>
-						<svelte:component this={item.icon} size={20} strokeWidth={1.2}></svelte:component>
-					</Tooltip>
+					<DarkLightSwitcher bind:isDarkMode></DarkLightSwitcher>
 				</DockIcon>
-			{/each}
-			<DockIcon {mouseX} {magnification} {distance}>
-				<DarkLightSwitcher bind:isDarkMode></DarkLightSwitcher>
-			</DockIcon>
-		</DockMenu>
+								{/snippet}
+				</DockMenu>
 	</div>
 
 	<div id="content" class="content flex justify-center">
@@ -87,7 +100,7 @@
 			</div>
 		{:else}
 			<div class="flex items-center justify-center">
-				<slot />
+				{@render children?.()}
 			</div>
 		{/if}
 	</div>

@@ -2,12 +2,16 @@
 	import { Button } from 'bits-ui';
 	import { twJoin } from 'tailwind-merge';
 
-	export let href: string = '';
+	interface Props {
+		href?: string;
+		/** If true, the button will call history.back() when clicked */
+		goback?: boolean;
+		onClick?: undefined | ((event: MouseEvent) => void);
+		red?: boolean;
+		children?: import('svelte').Snippet;
+	}
 
-	/** If true, the button will call history.back() when clicked */
-	export let goback: boolean = false;
-	export let onClick: undefined | ((event: MouseEvent) => void) = undefined;
-	export let red: boolean = false;
+	let { href = '', goback = false, onClick = undefined, red = false, children }: Props = $props();
 
 	const btnCommon = 'relative rounded px-4 py-2 font-bold text-black';
 	const btnPrimary = 'bg-magnum-300 hover:bg-magnum-600 hover:text-white active:bg-magnum-800';
@@ -30,10 +34,10 @@
 		on:click={clickHandler}
 		class={twJoin(btnCommon, red ? btnRed : btnPrimary)}
 	>
-		<slot />
+		{@render children?.()}
 	</Button.Root>
 {:else}
 	<Button.Root on:click={clickHandler} {href} class={twJoin(btnCommon, red ? btnRed : btnPrimary)}>
-		<slot />
+		{@render children?.()}
 	</Button.Root>
 {/if}

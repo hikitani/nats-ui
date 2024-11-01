@@ -1,9 +1,9 @@
 <script>
-	export let Hst;
 	import Input from '@components/Input.svelte';
 	import Label from '@components/Label.svelte';
+	let { Hst } = $props();
 
-	let text = 'Hello world';
+	let text = $state('Hello world');
 </script>
 
 <Hst.Story>

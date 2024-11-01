@@ -1,6 +1,6 @@
 <script>
-	export let Hst;
 	import Button from '@components/Button.svelte';
+	let { Hst } = $props();
 </script>
 
 <Hst.Story>

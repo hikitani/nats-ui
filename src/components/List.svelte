@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Link from './Link.svelte';
 
-	export let header:
+	interface Props {
+		header?: 
 		| undefined
 		| {
 				title: string;
@@ -11,7 +12,11 @@
 							text: string;
 							href: string;
 					  };
-		  } = undefined;
+		  };
+		children?: import('svelte').Snippet;
+	}
+
+	let { header = undefined, children }: Props = $props();
 </script>
 
 <div
@@ -33,7 +38,7 @@
 
 		<!-- Items -->
 		<div class="divide-y divide-gray-200 dark:divide-zinc-400">
-			<slot />
+			{@render children?.()}
 		</div>
 	</div>
 </div>
