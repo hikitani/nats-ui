@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { Tooltip } from 'bits-ui';
 	import { cn, flyAndScale } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		text?: string;
 		href?: string | undefined;
-		children?: import('svelte').Snippet;
+		children?: Snippet<[]>;
 	}
 
 	let { text = '', href = undefined, children }: Props = $props();
@@ -16,15 +17,17 @@
 </script>
 
 <Tooltip.Root openDelay={0}>
-	<Tooltip.Trigger asChild >
-		{#snippet children({ builder })}
-				{#if href}
-				<a {href} use:builder.action {...builder} class={buttonClasses}>{@render children?.()}</a>
-			{:else}
-				<button use:builder.action {...builder} class={buttonClasses}>{@render children?.()}</button>
-			{/if}
-					{/snippet}
-		</Tooltip.Trigger>
+	<Tooltip.Trigger asChild let:builder>
+		{#if href}
+			<a {href} use:builder.action {...builder} class={buttonClasses}>
+				{@render children?.()}
+			</a>
+		{:else}
+			<button use:builder.action {...builder} class={buttonClasses}>
+				{@render children?.()}
+			</button>
+		{/if}
+	</Tooltip.Trigger>
 	<Tooltip.Content
 		transition={flyAndScale}
 		transitionConfig={{ y: 8, duration: 150 }}

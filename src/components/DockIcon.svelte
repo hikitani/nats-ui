@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 	import { Motion, useMotionValue, useSpring, useTransform } from 'svelte-motion';
-	import { type Action } from 'svelte/action';
+	import { type Snippet } from 'svelte';
 
 	interface Props {
 		magnification?: number;
 		distance?: number;
 		mouseX?: number;
 		class?: string | undefined;
-		children?: import('svelte').Snippet;
+		children?: Snippet<[]>;
 	}
 
 	let {
@@ -43,10 +43,8 @@
 	);
 </script>
 
-<Motion style={{ width: width }}>
-	{#snippet children({ motion }: { motion: Action })}
-		<div use:motion bind:this={iconElement} class={iconClass}>
-			{@render children?.()}
-		</div>
-	{/snippet}
+<Motion style={{ width: width }} let:motion>
+	<div use:motion bind:this={iconElement} class={iconClass}>
+		{@render children?.()}
+	</div>
 </Motion>

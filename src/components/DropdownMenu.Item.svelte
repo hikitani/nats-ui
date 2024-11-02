@@ -1,15 +1,14 @@
-<script>
+<script lang="ts">
 	import { DropdownMenu } from 'bits-ui';
 	import { Check } from 'lucide-svelte';
+	import type { Snippet } from 'svelte';
 
-	/**
-	 * @typedef {Object} Props
-	 * @property {boolean} [checked]
-	 * @property {import('svelte').Snippet} [children]
-	 */
+	interface Props {
+		checked: boolean;
+		children?: Snippet<[]>;
+	}
 
-	/** @type {Props} */
-	let { checked = false, children } = $props();
+	let { checked = false, children }: Props = $props();
 </script>
 
 <DropdownMenu.Item

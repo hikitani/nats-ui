@@ -56,7 +56,7 @@
 	}
 
 	let {
-		value = $bindable(''),
+		value = $bindable(),
 		id = '',
 		type = InputType.Text,
 		disabled = false,

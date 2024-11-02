@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from 'bits-ui';
 	import { twJoin } from 'tailwind-merge';
+	import { type Snippet } from 'svelte';
 
 	interface Props {
 		href?: string;
@@ -8,7 +9,7 @@
 		goback?: boolean;
 		onClick?: undefined | ((event: MouseEvent) => void);
 		red?: boolean;
-		children?: import('svelte').Snippet;
+		children?: Snippet<[]>;
 	}
 
 	let { href = '', goback = false, onClick = undefined, red = false, children }: Props = $props();

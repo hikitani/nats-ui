@@ -1,11 +1,10 @@
-<script>
-	/**
-	 * @typedef {Object} Props
-	 * @property {import('svelte').Snippet} [children]
-	 */
+<script lang="ts">
+	import type { Snippet } from 'svelte';
 
-	/** @type {Props} */
-	let { children } = $props();
+	interface Props {
+		children?: Snippet<[]>;
+	}
+	let { children }: Props = $props();
 </script>
 
 <div class="flex items-center justify-between pb-3 pt-3 last:pb-0">

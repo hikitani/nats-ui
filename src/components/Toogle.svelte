@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { Toggle } from 'bits-ui';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		onPressedChange?: ((checked: boolean) => void) | undefined;
 		pressed?: boolean;
-		children?: import('svelte').Snippet;
+		children?: Snippet<[]>;
 	}
 
 	let { onPressedChange = undefined, pressed = $bindable(false), children }: Props = $props();

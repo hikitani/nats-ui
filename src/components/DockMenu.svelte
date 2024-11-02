@@ -2,7 +2,6 @@
 	import { Motion } from 'svelte-motion';
 	import { cva, type VariantProps } from 'class-variance-authority';
 	import { cn } from '$lib/utils';
-	import { type Action } from 'svelte/action';
 
 	interface DockProps extends VariantProps<typeof dockVariants> {
 		className?: string;
@@ -48,20 +47,21 @@
 	});
 </script>
 
-<Motion>
-	{#snippet children(motion: Action)}
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div
-			use:motion
-			bind:this={dockElement}
-			onmousemove={(e) => handleMouseMove(e)}
-			onmouseleave={handleMouseLeave}
-			class={dockClass}
-		>
-			{#if children}{@render children({ mouseX, magnification, distance })}{:else}
-				<!-- Your Content -->
-				Default
-			{/if}
-		</div>
-	{/snippet}
+<Motion let:motion>
+	<div
+		role="menuitem"
+		tabindex="-1"
+		use:motion
+		bind:this={dockElement}
+		onmousemove={(e) => handleMouseMove(e)}
+		onmouseleave={handleMouseLeave}
+		class={dockClass}
+	>
+		{#if children}
+			{@render children({ mouseX, magnification, distance })}
+		{:else}
+			<!-- Your Content -->
+			Default
+		{/if}
+	</div>
 </Motion>

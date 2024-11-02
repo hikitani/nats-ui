@@ -1,19 +1,20 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import Link from './Link.svelte';
 
 	interface Props {
-		header?: 
-		| undefined
-		| {
-				title: string;
-				link?:
-					| undefined
-					| {
-							text: string;
-							href: string;
-					  };
-		  };
-		children?: import('svelte').Snippet;
+		header?:
+			| undefined
+			| {
+					title: string;
+					link?:
+						| undefined
+						| {
+								text: string;
+								href: string;
+						  };
+			  };
+		children?: Snippet<[]>;
 	}
 
 	let { header = undefined, children }: Props = $props();

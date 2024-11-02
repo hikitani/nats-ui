@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
 	import { DropdownMenu } from 'bits-ui';
 	import { flyAndScale } from '$lib/utils';
-	/**
-	 * @typedef {Object} Props
-	 * @property {import('svelte').Snippet} [children]
-	 */
+	import type { Snippet } from 'svelte';
 
-	/** @type {Props} */
-	let { children } = $props();
+	interface Props {
+		children?: Snippet<[]>;
+	}
+
+	let { children }: Props = $props();
 </script>
 
 <DropdownMenu.Content transition={flyAndScale} sideOffset={8}>

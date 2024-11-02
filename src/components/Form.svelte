@@ -97,7 +97,6 @@
 
 	const formId = makeid(6);
 
-	// const validateData
 	const onClick = async (event: MouseEvent) => {
 		const problems = await send.onSend(data);
 		if (problems && Object.keys(problems).length !== 0) {
@@ -150,9 +149,9 @@
 						>
 							{#each problems as problem}
 								<li class="text-zinc-700">
-									<Label className="text-rose-600 font-semibold" props={{ for: inputId }}
-										>{problem.message}</Label
-									>
+									<Label className="text-rose-600 font-semibold" props={{ for: inputId }}>
+										{problem.message}
+									</Label>
 								</li>
 							{/each}
 						</ul>

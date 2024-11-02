@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { Label } from 'bits-ui';
 	import { cn } from '$lib/utils';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		props: {
-		id?: string;
-		for: string;
-	};
+			id?: string;
+			for: string;
+		};
 		className?: string | undefined;
-		children?: import('svelte').Snippet;
+		children?: Snippet<[]>;
 	}
 
 	let { props, className = '', children }: Props = $props();
