@@ -1,6 +1,4 @@
-<script>
-	import { run } from 'svelte/legacy';
-
+<script lang="ts">
 	import '@styles/app.css';
 	import DockMenu from '@components/DockMenu.svelte';
 	import DockIcon from '@components/DockIcon.svelte';
@@ -14,13 +12,13 @@
 	import { tweened } from 'svelte/motion';
 	import { page } from '$app/stores';
 	import { replaceState } from '$app/navigation';
-	/**
-	 * @typedef {Object} Props
-	 * @property {import('svelte').Snippet} [children]
-	 */
+	import type { Snippet } from 'svelte';
 
-	/** @type {Props} */
-	let { children } = $props();
+	interface Props {
+		children?: Snippet<[]>;
+	}
+
+	let { children }: Props = $props();
 
 	let navs = [
 		{ label: 'Home', icon: Home, href: '/' },
@@ -29,21 +27,25 @@
 	];
 
 	let isDarkMode = $state(isDark());
-	let dotPos = tweened(15);
-	run(() => {
+	const dotPosByDarkMode = () => {
 		if (isDarkMode) {
-			dotPos.set(17);
+			return 17;
 		} else {
-			dotPos.set(12);
+			return 12;
 		}
+	};
+
+	let dotPos = tweened(dotPosByDarkMode());
+	$effect(() => {
+		dotPos.set(dotPosByDarkMode());
 	});
 </script>
 
 <div class=" bg-magnum-100 dark:bg-zinc-500">
 	<div id="menu" class="sticky top-0 z-50 ml-auto mr-auto mt-0 pb-5 pt-5">
-		<DockMenu direction="middle"   >
+		<DockMenu direction="middle">
 			{#snippet children({ mouseX, distance, magnification })}
-						{#each navs as item}
+				{#each navs as item}
 					<DockIcon {mouseX} {magnification} {distance}>
 						<Tooltip text={item.label} href={item.href}>
 							<item.icon size={20} strokeWidth={1.2}></item.icon>
@@ -53,8 +55,8 @@
 				<DockIcon {mouseX} {magnification} {distance}>
 					<DarkLightSwitcher bind:isDarkMode></DarkLightSwitcher>
 				</DockIcon>
-								{/snippet}
-				</DockMenu>
+			{/snippet}
+		</DockMenu>
 	</div>
 
 	<div id="content" class="content flex justify-center">

@@ -4,7 +4,7 @@
 	import type { Snippet } from 'svelte';
 
 	interface Props {
-		checked: boolean;
+		checked?: boolean;
 		children?: Snippet<[]>;
 	}
 

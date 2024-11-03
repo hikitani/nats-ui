@@ -131,5 +131,6 @@
 		@apply rounded-md border-2 border-magnum-400 bg-white px-3 py-2 font-normal text-zinc-800;
 		@apply hover:border-magnum-300;
 		@apply focus:outline-none focus:ring-2 focus:ring-gray-600/80 focus:ring-offset-2;
+		@apply disabled:bg-zinc-400/40 disabled:hover:border-magnum-400;
 	}
 </style>
